@@ -1,4 +1,8 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Stethoscope, ScanLine, ClipboardList, Sparkles, Users, Hospital } from "lucide-react";
+import { cardHover, fadeUp, staggerContainer, viewportOnce } from "@/lib/motion";
 
 const promises = [
   {
@@ -35,23 +39,50 @@ const promises = [
 
 export default function OurPromises() {
   return (
-    <section className="section-shell px-4 sm:px-6 md:px-8">
+    <motion.section
+      className="section-shell px-4 sm:px-6 md:px-8"
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportOnce}
+    >
       <div className="site-shell">
-        <div className="section-heading">
-          <p className="section-kicker">Our promise to every patient</p>
-          <h2 className="section-title">A polished clinic experience grounded in empathy and real expertise.</h2>
-          <p className="section-copy mx-auto max-w-3xl">
+        <motion.div
+          className="section-heading"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          <motion.p variants={fadeUp} className="section-kicker">
+            Our promise to every patient
+          </motion.p>
+          <motion.h2 variants={fadeUp} className="section-title">
+            A polished clinic experience grounded in empathy and real expertise.
+          </motion.h2>
+          <motion.p variants={fadeUp} className="section-copy mx-auto max-w-3xl">
             Patients searching for the best dental clinic in Noida want more than technology. They want confidence,
             comfort, and a team that treats them like people, not appointments.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <motion.div
+          className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
           {promises.map((item) => {
             const Icon = item.icon;
 
             return (
-              <div key={item.title} className="card-surface p-7">
+              <motion.div
+                key={item.title}
+                variants={fadeUp}
+                whileHover={cardHover}
+                className="card-surface p-7"
+              >
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edf8f6]">
                   <Icon className="h-7 w-7 text-[#18b7ae]" strokeWidth={1.7} />
                 </div>
@@ -61,11 +92,11 @@ export default function OurPromises() {
                 <p className="mt-3 text-[15px] leading-7 text-[#5f7480]">
                   {item.desc}
                 </p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
